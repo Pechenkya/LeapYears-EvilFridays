@@ -292,5 +292,7 @@ int main()
 
 	print_evil_fridays(evil_fridays);
 
+	system("Pause");
+
 	return 0;
 }
