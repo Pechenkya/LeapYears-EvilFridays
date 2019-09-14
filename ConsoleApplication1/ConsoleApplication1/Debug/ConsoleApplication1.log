@@ -1,6 +1,4 @@
 ﻿  ConsoleApplication1.cpp
-d:\progs\visualstudioprojects\bissextialyearandfriday\consoleapplication1\consoleapplication1\consoleapplication1.cpp(88): warning C4551: в вызове функции отсутствует список аргументов
-d:\progs\visualstudioprojects\bissextialyearandfriday\consoleapplication1\consoleapplication1\consoleapplication1.cpp(109): warning C4018: <: несоответствие типов со знаком и без знака
-d:\progs\visualstudioprojects\bissextialyearandfriday\consoleapplication1\consoleapplication1\consoleapplication1.cpp(173): warning C4018: <: несоответствие типов со знаком и без знака
-d:\progs\visualstudioprojects\bissextialyearandfriday\consoleapplication1\consoleapplication1\consoleapplication1.cpp(278): warning C4551: в вызове функции отсутствует список аргументов
+d:\progs\visualstudioprojects\bissextialyearandfriday\consoleapplication1\consoleapplication1\consoleapplication1.cpp(112): warning C4018: <: несоответствие типов со знаком и без знака
+d:\progs\visualstudioprojects\bissextialyearandfriday\consoleapplication1\consoleapplication1\consoleapplication1.cpp(176): warning C4018: <: несоответствие типов со знаком и без знака
   ConsoleApplication1.vcxproj -> D:\Progs\VisualStudioProjects\BissextialyearandFriday\ConsoleApplication1\Debug\ConsoleApplication1.exe

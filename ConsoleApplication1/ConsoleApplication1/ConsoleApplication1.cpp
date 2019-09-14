@@ -26,16 +26,16 @@ struct day
 	int day_number;
 	int day_of_week;
 	int month_num;
+	int date;
 	std::string month_name;
 	std::string day_name;
 
-	day(int in_day_num, int in_day_of_week, int in_month_num)
+	day(int in_day_num, int in_day_of_week, int in_month_num, int in_date)
 	{
 		day_number = in_day_num;
 		day_of_week = in_day_of_week;
 		month_num = in_month_num;
-
-		//set_week_day(day_of_week, day_name);
+		date = in_date;
 	}
 };
 
@@ -84,20 +84,23 @@ void set_week_day(int & day_of_week, std::string & day_name)
 day get_first_day(int year)
 {
 	if (year == 1)
-		return day(1, 1, 1);
-	else if (year_is_bissextial)
-	{
-		int temp_date = get_first_day(year - 1).day_of_week + 2;
-		if (temp_date > 7)
-			temp_date -= 7;
-		return day(1, temp_date, 1);
-	}
-	else
+		return day(1, 1, 1, 1);
+	else if (year == 1583)
+		return day(1, 6, 1, 1);
+	else if (year_is_bissextial(year))
 	{
 		int temp_date = get_first_day(year - 1).day_of_week + 1;
 		if (temp_date > 7)
 			temp_date -= 7;
-		return day(1, temp_date, 1);
+		return day(1, temp_date, 1, 1);
+	}
+	else
+	{
+		int temp_date = get_first_day(year - 1).day_of_week + 1;
+		if (year_is_bissextial(year - 1)) temp_date++;
+		if (temp_date > 7)
+			temp_date -= 7;
+		return day(1, temp_date, 1, 1);
 	}
 };
 
@@ -112,7 +115,7 @@ std::vector<day> find_fridays(day first_day, int year, std::vector<int> mounth)
 		{
 			if (temp_date == 5)
 			{
-				fridays_vec.push_back(day(date_counter, 5, i+1));
+				fridays_vec.push_back(day(date_counter, 5, i+1, j));
 				set_week_day(fridays_vec.back().day_of_week, fridays_vec.back().day_name);
 				j += 7;
 				date_counter += 7;
@@ -261,9 +264,9 @@ void set_month(day & in_day)
 
 void print_evil_fridays(std::vector<day>& fridays) 
 {
-	std::cout << std::endl << "Evil Fridays in this year:" << std::endl << std::endl;
+	std::cout << std::endl << "Evil Fridays in this year:" << std::endl;
 	for (auto t : fridays)
-		std::cout << t.day_name << ": " << 13 << " " << t.month_name << std::endl;
+		std::cout << t.day_name << " - " << t.date << " " << t.month_name << std::endl;
 }
 
 int main()
@@ -272,10 +275,11 @@ int main()
 	std::vector <int> mounth;
 	std::vector <day> evil_fridays;
 
+	std::cout << "Attention! Program is calculating dates by Grigorian calendar!" << std::endl;
 	std::cout << "Enter date(year): ";
 	std::cin >> year;
 
-	if (year_is_bissextial)
+	if (year_is_bissextial(year))
 		mounth = { 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 	else
 		mounth = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
@@ -289,6 +293,11 @@ int main()
 	{
 		set_month(t);
 	}
+
+	day first_day = get_first_day(year);
+	set_week_day(first_day.day_of_week, first_day.day_name);
+	set_month(first_day);
+	std::cout << "First Day: " << std::endl << first_day.day_name << " - " << first_day.date << " " << first_day.month_name << std::endl;
 
 	print_evil_fridays(evil_fridays);
 
